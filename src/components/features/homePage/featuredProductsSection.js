@@ -14,7 +14,7 @@ export const FeaturedProductsSection = ({ products }) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
-          <Card key={product.id} className="hover:shadow-lg transition-shadow">
+          <Card key={product.title} className="hover:shadow-lg transition-shadow">
             <CardContent className="p-4">
               <Link href={`/products/${product.id}`}>
                 <div className="aspect-square mb-4 relative overflow-hidden rounded-md">
