@@ -4,13 +4,23 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts"
 import { Pagination } from "./pagination"
+import { SortSelect } from "./sortSelect"
+import { CategoryFilter } from "./categoryFilter"
 
-export async function ProductsGrid({ page, productPerPage = 12, category }) {
-  const { data, total } = await getPaginatedProducts(page, productPerPage, category)
+export async function ProductsGrid({ page, productPerPage = 12, category, sortBy, sortOrder }) {
+  const { data, total } = await getPaginatedProducts({ page, productPerPage, category, sortBy, sortOrder })
   const totalPages = Math.ceil(total / productPerPage);
 
   return (
     <div>
+      <div className="flex items-center justify-between flex-wrap gap-4 mb-6 p-4 bg-white rounded-lg shadow-sm">
+        <div className="flex flex-wrap gap-4">
+          <CategoryFilter />
+          <SortSelect />
+        </div>
+        <div className="w-[130px] text-sm text-gray-600">{total} products found</div>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
         {data.map((product) => (
           <Card key={product.id} className="hover:shadow-lg transition-shadow">

@@ -5,7 +5,7 @@ import { Suspense } from "react"
 export default async function ProductsPage({
   searchParams,
 }) {
-  const { page, category } = await searchParams;
+  const { page = 1, category, sortBy, sortOrder } = await searchParams;
 
   return (
     <div className="container max-w-[1200px] mx-auto px-4 py-8">
@@ -16,8 +16,13 @@ export default async function ProductsPage({
         <p className="text-gray-600">Find the best products at the best prices</p>
       </div>
 
-      <Suspense fallback={<ProductsLoading />}>
-        <ProductsGrid page={Number(page)} category={category} />
+      <Suspense key={`${page}-${category}-${sortBy}-${sortOrder}`} fallback={<ProductsLoading />}>
+        <ProductsGrid
+          page={Number(page)}
+          category={category}
+          sortBy={sortBy}
+          sortOrder={sortOrder}
+        />
       </Suspense>
     </div>
   )
