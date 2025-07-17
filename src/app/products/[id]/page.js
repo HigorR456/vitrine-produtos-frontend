@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { getProduct } from "@/lib/api/getProduct"
+import { getProduct } from "@/lib/api/products/getProduct"
 
 export async function generateStaticParams() {
-  const products = Array.from({ length: 100 }, (_, i) => i + 1)
+  const products = Array.from({ length: 10 }, (_, i) => i + 1)
   return products.map((id) => ({
     id: id.toString(),
   }))
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 
 export const revalidate = 3600 // 1 hour
 
-export default async function ProductPage({ params }) {
+export default async function ProductPage({ params: props }) {
+  const params = await props
   const product = await getProduct(Number.parseInt(params.id))
 
   if (!product) {
@@ -44,13 +45,14 @@ export default async function ProductPage({ params }) {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         <div className="space-y-4">
           <div className="aspect-square relative overflow-hidden rounded-lg border">
             <Image
               src={product.images[0] || product.thumbnail}
               alt={product.title}
               fill
+              sizes="(max-width: 767px) 400px, 500px"
               className="object-cover"
               priority
             />
@@ -63,6 +65,7 @@ export default async function ProductPage({ params }) {
                     src={image || "/placeholder.svg"}
                     alt={`${product.title} ${index + 2}`}
                     fill
+                    sizes="(max-width: 767px) 100px, 130px"
                     className="object-cover"
                   />
                 </div>

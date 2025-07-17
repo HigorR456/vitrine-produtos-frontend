@@ -2,13 +2,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts"
-import { Pagination } from "./pagination"
-import { SortSelect } from "./sortSelect"
-import { CategoryFilter } from "./categoryFilter"
+import { getPaginatedProducts } from "@/lib/api/products/getPaginatedProducts"
+import { Pagination } from "../pagination"
+import { SortSelect } from "../sortSelect"
+import { CategoryFilter } from "../categoryFilter"
 
 export async function ProductsGrid({ page, productPerPage = 12, category, sortBy, sortOrder }) {
-  const { data, total } = await getPaginatedProducts({ page, productPerPage, category, sortBy, sortOrder })
+  const { data, total } = await getPaginatedProducts({ page, limit: productPerPage, category, sortBy, sortOrder })
   const totalPages = Math.ceil(total / productPerPage);
 
   return (
@@ -31,6 +31,7 @@ export async function ProductsGrid({ page, productPerPage = 12, category, sortBy
                     src={product.thumbnail || "/placeholder.svg"}
                     alt={product.title}
                     fill
+                    sizes="(max-width: 767px) 400px, 270px"
                     className="object-cover hover:scale-105 transition-transform"
                   />
                 </div>

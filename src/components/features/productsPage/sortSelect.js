@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button"
 
 const sortFields = [
+  { value: "rating", label: "Rating" },
   { value: "category", label: "Category" },
   { value: "title", label: "Name" },
   { value: "price", label: "Price" },
@@ -14,8 +15,8 @@ export function SortSelect() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const sortBy = searchParams.get("sortBy") || "category"
-  const sortOrder = searchParams.get("sortOrder") || "asc"
+  const sortBy = searchParams.get("sortBy") || "rating"
+  const sortOrder = searchParams.get("sortOrder") || "desc"
 
   const handleFieldChange = (field) => {
     const params = new URLSearchParams(searchParams.toString())

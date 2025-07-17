@@ -1,5 +1,5 @@
-import { ProductsLoading } from "@/components/features/productsPage/productsLoading"
-import { ProductsGrid } from "@/components/features/productsPage/productsGrid"
+import { ProductsLoading } from "@/components/features/productsPage/productsGrid/productsLoading"
+import { ProductsGrid } from "@/components/features/productsPage/productsGrid/productsGrid"
 import { Suspense } from "react"
 
 export default async function ProductsPage({
