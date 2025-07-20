@@ -3,11 +3,21 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { logout } from '@/lib/api/auth/logout';
 import { Heart, LogOut, ShoppingBag, UserPen } from 'lucide-react';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation'
 
 export const UserProfile = ({ email }) => {
-  const handleLogout = () => {
-
+  const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success('Logging out...');
+      router.push("/account/user")
+    } catch (error) {
+      toast.error('Failed to logout. Please try again later.');
+    }
   }
 
   return (
