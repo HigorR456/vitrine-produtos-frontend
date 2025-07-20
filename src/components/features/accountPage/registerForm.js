@@ -20,10 +20,10 @@ export const RegisterForm = () => {
   async function onSubmit(data) {
     try {
       await registerUser(data)
-      toast("Account created")
+      toast.success("Account created")
       router.push("/account/user")
     } catch (error) {
-      toast("Registration failed")
+      toast.error("Registration failed")
     }
   }
 

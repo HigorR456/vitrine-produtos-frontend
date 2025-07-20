@@ -19,10 +19,10 @@ export const LoginForm = () => {
   async function onSubmit(data) {
     try {
       await loginUser(data)
-      toast("Successfully logged in")
+      toast.success("Successfully logged in")
       router.push("/account/user")
     } catch (error) {
-      toast("Login failed")
+      toast.error("Login failed")
     }
   }
 
