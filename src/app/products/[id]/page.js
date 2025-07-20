@@ -1,12 +1,13 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { Star, ShoppingCart, Heart, Share2, ChevronLeft } from "lucide-react"
+import { Star, ChevronLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { getProduct } from "@/lib/api/products/getProduct"
+import { ProductButtons } from "@/components/features/productPage/productButtons"
 
 export async function generateStaticParams() {
   const products = Array.from({ length: 10 }, (_, i) => i + 1)
@@ -91,25 +92,7 @@ export default async function ProductPage({ params: props }) {
             <p className="text-sm text-gray-600">Weight: {product.weight}kg</p>
           </div>
 
-          <div className="space-y-3">
-            <Button size="lg" className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer">
-              <ShoppingCart className="h-5 w-5 mr-2" />
-              Buy now
-            </Button>
-            <Button variant="outline" size="lg" className="w-full bg-transparent cursor-pointer">
-              Add to cart
-            </Button>
-            <div className="flex space-x-2">
-              <Button variant="outline" size="sm" className="flex-1 bg-transparent cursor-pointer">
-                <Heart className="h-4 w-4 mr-1" />
-                Favorites
-              </Button>
-              <Button variant="outline" size="sm" className="flex-1 bg-transparent cursor-pointer">
-                <Share2 className="h-4 w-4 mr-1" />
-                Share
-              </Button>
-            </div>
-          </div>
+          <ProductButtons id={Number.parseInt(params.id)} />
         </div>
       </div>
 

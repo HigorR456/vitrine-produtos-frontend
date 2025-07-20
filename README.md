@@ -14,9 +14,11 @@ Frontend de e-commerce, contruído com Next.js, com foco em consumir backend tir
 - Suporte á paginação ***(/products?page=2)*** via searchParams
 - Filtros de categoria, ordenação por preço, avaliação ou categoria via searchParams ***(/products?sortBy=price&sortOrder=asc)***
 - Detalhamento de produto por id ***(/produtos/[id])*** com **SSG**
+- Botão para comprar e adicionar item ao **carrinho** com armazenamento no **localStorage**.
+- Gerenciamento de itens do carrinho de compras em ***(/cart)***.
 
 🔐 Rotas Protegidas
-- Perfil do usuário logado ***(/account/user)***
+- Perfil do usuário logado com opção de **deslogar** em ***(/account/user)***
 
 ## Tecnologias Utilizadas
 
